@@ -10,12 +10,14 @@ colnames(pasilla_df) <- c("Gene ID", "Mean expression", "Log2 fold change (treat
 default_columns <- c("Gene ID", "Log2 fold change (treated vs untreated)", "P-value", "Adjusted p-value")
 
 ui <- fluidPage(
-  tableUI("pasilla", all_cols = colnames(pasilla_df),
+  tableUI(id = "pasilla",
+          all_cols = colnames(pasilla_df),
           default_cols = default_columns)
 )
 
 server <- function(input, output, session) {
- tableServer("pasilla", pasilla_df)
+  shinyhelper::observe_helpers()
+  tableServer("pasilla", pasilla_df)
 }
 
 shinyApp(ui, server)
