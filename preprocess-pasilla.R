@@ -30,3 +30,11 @@ res_df <- res_df[, names(res_df)[c(7,1:6)]]
 
 write.csv(res_df, file="data/pasilla_condition_treated_results.csv",
           row.names = FALSE, quote = FALSE)
+
+
+counts_df <- as.data.frame(cts)
+counts_df$gene_id <- rownames(counts_df)
+counts_df <- counts_df[, names(counts_df)[c(8,1:7)]]
+
+write.csv(counts_df, file="data/pasilla_counts.csv",
+          row.names = FALSE, quote = FALSE)
