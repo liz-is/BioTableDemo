@@ -21,20 +21,25 @@ default_columns <- c("Gene ID",
 
 gene_ids <- pasilla_df[["Gene ID"]]
 
-ui <- fluidPage(tabsetPanel(
-  tabPanel(
-    "Home",
-    tableUI(id = "pasilla_results"),
-    selectizeInput(
-      inputId = "gene_id",
-      label = "Filter by gene",
-      choices = NULL,
-      selected = NULL,
-      multiple = TRUE
-    )
-  ),
-  tabPanel("Raw counts", tableUI(id = "pasilla_counts"))
-))
+ui <- fluidPage(titlePanel("The Pasilla dataset"),
+                sidebarLayout(
+                  sidebarPanel(
+                    selectizeInput(
+                      inputId = "gene_id",
+                      label = "Filter all tables by gene",
+                      choices = NULL,
+                      selected = NULL,
+                      multiple = TRUE
+                    )
+                  ),
+                  mainPanel(
+                    includeMarkdown("desc/pasilla.md"),
+                    tabsetPanel(
+                      tabPanel("All results", tableUI(id = "pasilla_results")),
+                      tabPanel("Raw counts", tableUI(id = "pasilla_counts"))
+                    )
+                  )
+                ))
 
 server <- function(input, output, session) {
   shinyhelper::observe_helpers()
