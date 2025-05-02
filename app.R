@@ -19,9 +19,10 @@ default_columns <- c("Gene ID",
                      "Adjusted p-value")
 
 ui <- fluidPage(
-  tableUI(id = "pasilla_results"),
-  tableUI(id = "pasilla_counts")
-  )
+  tabsetPanel(
+    tabPanel("Home", tableUI(id = "pasilla_results")),
+    tabPanel("Raw counts", tableUI(id = "pasilla_counts"))
+  ))
 
 server <- function(input, output, session) {
   shinyhelper::observe_helpers()
